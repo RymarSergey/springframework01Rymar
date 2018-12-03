@@ -11,13 +11,20 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Student {
-    private  final int NUMBER_OF_QUESTIONS = 5;
+    //
     private String firstName;
     private String secondName;
-    boolean[] ansvers=new boolean[NUMBER_OF_QUESTIONS];
+    private String[] ansvers/*=new boolean[NUMBER_OF_QUESTIONS]*/;
 
-    void setAnsver(int questionNumber, boolean ansver) {
-        ansvers[questionNumber]=ansver;
+    public Student(String thisFirstName,String thisSecondName,int numOfQuestion){
+        firstName=thisFirstName;
+        secondName=thisSecondName;
+        ansvers=new String[numOfQuestion];
+    }
+
+    public void setAnsver(int questionNumber,String verdict) {
+
+        ansvers[questionNumber]=verdict;
     }
 
 }

@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
 http://www.springframework.org/schema/beans ">
-    <bean id="personDao" class="ru.otus.spring01.dao.PersonDaoSimple">
-        <!--<property name="defaultAge" value="33"/>-->
+   <!-- <context:property-placeholder location="questions.csv"/>-->
+    <bean id="studentId"
+          class="ru.otus.spring01.rymar.domain.Student">
+        <constructor-arg name="thisFirstName" value=""/>
+        <constructor-arg name="thisSecondName" value=""/>
+        <constructor-arg name="numOfQuestion" value="0"/>
     </bean>
-    <bean id="personService" class="ru.otus.spring01.service.PersonServiceImpl">
-        <!--<property name="dao" ref="personDao"/>-->
-        <constructor-arg name="dao" ref="personDao"/>
+    <bean id="studentDaoId"
+          class="ru.otus.spring01.rymar.dao.StudentDaoImpl">
+        <property name="student" ref="studentId"/>
     </bean>
+    <bean id="studentServiceId"
+          class="ru.otus.spring01.rymar.services.StudentServiceImpl">
+        <constructor-arg name="studentDao" ref="studentDaoId"/>
+    </bean>
+    <bean id="questionId"
+          class="ru.otus.spring01.rymar.domain.Question">
+        <property name="questionIndex" value="0"/>
+        <property name="question" value=""/>
+        <property name="ansvers" value="null"/>
+        <property name="rightAnsver" value=""/>
+
+    </bean>
+    <bean id="questiondao"
+          class="ru.otus.spring01.rymar.dao.QuestionDaoImpl">
+        <property name="question" ref="questionId"/>
+    </bean>
+    <bean id="questionService"
+          class="ru.otus.spring01.rymar.services.QuestionServiceImpl">
+        <constructor-arg name="dao" ref="questiondao"/>
+    </bean>
+
 </beans>
